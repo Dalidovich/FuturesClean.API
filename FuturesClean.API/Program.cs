@@ -1,3 +1,7 @@
+using FuturesClean.API.Code.Extensions;
+using FuturesClean.API.Data;
+using FuturesClean.API.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuturesClean.API
 {
@@ -10,6 +14,12 @@ namespace FuturesClean.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.AddHostedService();
+            builder.AddRepositores();
+            builder.AddServices();
+
+            builder.Services.AddDbContext<AppDBContext>(opt => opt.UseNpgsql(
+                builder.Configuration.GetConnectionString(StandartConst.NameConnection)));
 
             var app = builder.Build();
 
