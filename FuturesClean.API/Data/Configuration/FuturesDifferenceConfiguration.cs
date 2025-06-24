@@ -1,4 +1,4 @@
-﻿using FuturesClean.API.Code.DataTypes;
+﻿using FuturesClean.API.Code.Constants;
 using FuturesClean.API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

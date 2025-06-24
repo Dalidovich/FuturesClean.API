@@ -9,5 +9,17 @@
         public string SymbolNext { get; set; }
         public decimal Spread { get; set; }
 
+        public FuturesDifference(DateTime timeMeasuredUtc, string interval, string symbolCurrent, string symbolNext, decimal spread)
+        {
+            TimeMeasuredUtc = timeMeasuredUtc;
+            Interval = interval;
+            SymbolCurrent = symbolCurrent;
+            SymbolNext = symbolNext;
+            Spread = spread;
+        }
+
+        public FuturesDifference()
+        {
+        }
     }
 }

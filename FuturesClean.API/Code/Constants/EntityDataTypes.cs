@@ -1,4 +1,4 @@
-﻿namespace FuturesClean.API.Code.DataTypes
+﻿namespace FuturesClean.API.Code.Constants
 {
     public static class EntityDataTypes
     {
