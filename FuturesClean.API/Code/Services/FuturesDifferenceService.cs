@@ -20,11 +20,11 @@ namespace FuturesClean.API.Code.Services
             _futuresDifferenceFetcherService = futuresDifferenceFetcherService;
         }
 
-        public async Task<BaseResponse<FuturesDifference>> CalculateFuturesDifferenceAsync(string intervalType, DateTime utcTime)
+        public async Task<BaseResponse<FuturesDifference>> CalculateFuturesDifferenceAsync(string intervalType, DateTime utcTime, string symbols)
         {
             //можно накинуть на Interval валидаторы
-            var currentQuarter = await _futuresDifferenceFetcherService.GetQuarterSymbolsAsync(QuarterType.CurrentQuarter);
-            var nextQuarter = await _futuresDifferenceFetcherService.GetQuarterSymbolsAsync(QuarterType.NextQuarter);
+            var currentQuarter = await _futuresDifferenceFetcherService.GetQuarterSymbolsAsync(QuarterType.CurrentQuarter, symbols);
+            var nextQuarter = await _futuresDifferenceFetcherService.GetQuarterSymbolsAsync(QuarterType.NextQuarter, symbols);
 
             if (currentQuarter.InnerStatusCode != InnerStatusCode.OK || nextQuarter.InnerStatusCode != InnerStatusCode.OK)
             {

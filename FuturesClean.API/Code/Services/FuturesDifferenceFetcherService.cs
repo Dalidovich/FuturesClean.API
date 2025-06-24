@@ -67,23 +67,32 @@ namespace FuturesClean.API.Code.Services
             };
         }
 
-        public async Task<BaseResponse<string>> GetQuarterSymbolsAsync(string quarterType)
+        public async Task<BaseResponse<string>> GetQuarterSymbolsAsync(string quarterType, string symbols)
         {
             string url = "https://dapi.binance.com/dapi/v1/exchangeInfo";
             var response = await _httpClient.GetStringAsync(url);
             var json = JObject.Parse(response);
 
-            var symbols = json["symbols"]!
-                .Where(s => s["symbol"]!.ToString().StartsWith("BTCUSD"))
+            var symbolsList = json["symbols"]!
+                .Where(s => s["symbol"]!.ToString().StartsWith(symbols))
                 .ToList();
 
-            string quarter = symbols.First(s => s["contractType"]!.ToString() == quarterType)["symbol"]!.ToString();
+            if (symbolsList.Count == 0)
+            {
+                return new StandartResponse<string>()
+                {
+                    Data = symbols,
+                    InnerStatusCode = InnerStatusCode.EntityNotFound,
+                    Message = $"not found {symbols} {quarterType} symbols"
+                };
+            }
+            string quarterSymbols = symbolsList.First(s => s["contractType"]!.ToString() == quarterType)["symbol"]!.ToString();
 
             return new StandartResponse<string>()
             {
-                Data = quarter,
+                Data = quarterSymbols,
                 InnerStatusCode = InnerStatusCode.OK,
-                Message = $"found BTCUSD {quarterType} symbols"
+                Message = $"found {symbols} {quarterType} symbols"
             };
         }
     }

@@ -8,7 +8,7 @@ namespace FuturesClean.API.Domain.Services
     {
         public Task<BaseResponse<FuturesDifference>> GetFuturesDifferenceAsync(Expression<Func<FuturesDifference, bool>> expression);
         public Task<BaseResponse<IEnumerable<FuturesDifference>>> GetFuturesDifferencesAsync(Expression<Func<FuturesDifference, bool>> expression);
-        public Task<BaseResponse<FuturesDifference>> CalculateFuturesDifferenceAsync(string intervalType, DateTime utcTime);
+        public Task<BaseResponse<FuturesDifference>> CalculateFuturesDifferenceAsync(string intervalType, DateTime utcTime, string symbols);
         public Task<BaseResponse<bool>> DeleteFuturesDifferenceAsync(Guid deleteId);
     }
 }

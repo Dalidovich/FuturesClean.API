@@ -16,9 +16,9 @@ namespace FuturesClean.API.Areas.Controllers
         }
 
         [HttpPost("FuturesDifference/")]
-        public async Task<IActionResult> DeleteFuturesDifference(string interval, DateTime utcTime)
+        public async Task<IActionResult> DeleteFuturesDifference([FromQuery] string interval, [FromQuery] DateTime utcTime, [FromQuery] string symbols)
         {
-            var resourse = await _futuresDifferenceService.CalculateFuturesDifferenceAsync(interval, utcTime);
+            var resourse = await _futuresDifferenceService.CalculateFuturesDifferenceAsync(interval, utcTime, symbols);
             if (resourse.InnerStatusCode == InnerStatusCode.FuturesDifferenceCreate)
             {
                 return Ok(resourse.Data);
